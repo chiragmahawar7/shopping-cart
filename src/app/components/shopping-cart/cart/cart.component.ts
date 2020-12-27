@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CartItem } from 'src/app/models/cart-item';
 import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
 import { MessengerService } from 'src/app/services/messenger.service';
 
 @Component({
@@ -9,54 +11,35 @@ import { MessengerService } from 'src/app/services/messenger.service';
 })
 export class CartComponent implements OnInit {
 
-  cartItems: CartItem[] = [
-    // { id: 1, productId: 1, productName: 'Test1', qty: 4, price: 100 },
-    // { id: 2, productId: 2, productName: 'Test2', qty: 5, price: 50 },
-    // { id: 3, productId: 3, productName: 'Test3', qty: 3, price: 150 },
-    // { id: 4, productId: 4, productName: 'Test4', qty: 2, price: 250 },
-  ];
-
+  cartItems: CartItem[] = [];
   cartTotal = 0;
 
-  constructor(private msg: MessengerService) { }
+  constructor(
+    private msg: MessengerService,
+    private cartService: CartService) { }
 
   ngOnInit() {
+    this.handleSubscription();
+    this.loadCartItems();
+  }
 
+  handleSubscription() {
     this.msg.getMsg().subscribe((product: Product) => {
-      this.addProductToCart(product);
+      this.loadCartItems();
     });
   }
 
-  addProductToCart(product: Product) {
+  loadCartItems() {
+    this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+      this.cartItems = items;
+      this.calCartTotal();
+    });
+  }
 
-    let productExists = false;
-
-    for (let item in this.cartItems) {
-      if (this.cartItems[item].productId === product.id) {
-        this.cartItems[item].qty++;
-        productExists = true;
-        break;
-      }
-    }
-
-    if (!productExists) {
-      this.cartItems.push({
-        productId: product.id,
-        productName: product.name,
-        qty: 1,
-        price: product.price
-      });
-    }
+  calCartTotal() {
     this.cartTotal = 0;
     this.cartItems.forEach(item => {
       this.cartTotal += (item.qty * item.price);
     });
   }
-}
-
-export interface CartItem {
-  productId: number;
-  productName: string;
-  qty: number;
-  price: number;
 }
