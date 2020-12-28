@@ -13,6 +13,11 @@ import { CartComponent } from './components/shopping-cart/cart/cart.component';
 import { CartItemComponent } from './components/shopping-cart/cart/cart-item/cart-item.component';
 import { CommonModule } from '@angular/common';
 import { ProductItemComponent } from './components/shopping-cart/product-list/product-item/product-item.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AppRoutingModule } from './app-routing.module';
+import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
+import { SupportComponent } from './components/support/support.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +30,17 @@ import { ProductItemComponent } from './components/shopping-cart/product-list/pr
     ProductListComponent,
     CartComponent,
     CartItemComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    LoginComponent,
+    RegisterComponent,
+    PageNotFoundComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
