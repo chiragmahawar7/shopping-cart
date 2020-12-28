@@ -2,6 +2,9 @@
 <!-- This will contain multiple product items -->
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     <div *ngFor="let product of productList" class="col" style="margin-top: 1rem;">
-        <app-product-item [productItem]="product"></app-product-item>
+        <app-product-item
+            [productItem]="product"
+            [addedToWishlist]="wishlist.indexOf(product.id) >= 0">
+        </app-product-item>
     </div>
 </div>
