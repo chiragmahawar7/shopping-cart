@@ -18,7 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { SupportComponent } from './components/support/support.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
