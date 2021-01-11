@@ -6,4 +6,8 @@ describe('Shopping Cart', () => {
     it('visit the page', () => {
         cy.visit('/');
     });
+
+    it('has title- ShoppingCart', () => {
+        cy.title().should('eq', 'ShoppingCart');
+    });
 });

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 // if the data is valid return null else return an object
 function symbolValidator(control: any) {
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
 
-  constructor(private builder: FormBuilder) { }
+  constructor(private builder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.buildForm();
@@ -51,5 +52,6 @@ export class RegisterComponent implements OnInit {
 
   register() {
     console.log(this.registerForm.value);
+    this.router.navigate(["/login"]);
   }
 }
